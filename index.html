@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カレンダー共有</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>家族カレンダー</h1>
+
+    <div id="register-form">
+        <h2>登録</h2>
+        <label for="register-username">Username:</label>
+        <input type="text" id="register-username" placeholder="Enter a username">
+
+        <label for="register-password">Password:</label>
+        <input type="password" id="register-password" placeholder="Enter a password">
+
+        <label for="register-secret">Secret Question (e.g., Your pet's name):</label>
+        <input type="text" id="register-secret" placeholder="Enter your answer">
+
+        <button onclick="registerUser()">Register</button>
+    </div>
+
+    <div id="login-form" style="display:none;">
+        <h2>Login</h2>
+        <label for="username">ユーザ名:</label>
+        <input type="text" id="username" placeholder="username">
+
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" placeholder="password">
+
+        <label for="password">秘密の質問:「青い空　白い雲　僕は飛び立つ」</label>
+        <input type="text" id="register-secret" placeholder="answer">
+
+        <button onclick="login()">ログイン</button>
+    </div>
+
+    <div id="calendar-container" style="display:none;">
+        <div class="calendar" id="calendar"></div>
+
+        <div class="event-form">
+            <label for="event-date">日付:</label>
+            <input type="date" id="event-date">
+
+            <label for="event-title">タイトル:</label>
+            <input type="text" id="event-title" placeholder="Enter event title">
+
+            <label for="event-start-time">開始時間:</label>
+            <input type="time" id="event-start-time">
+
+            <label for="event-end-time">終了時間:</label>
+            <input type="time" id="event-end-time">
+
+            <button onclick="addEvent()">追加</button>
+        </div>
+    </div>
+
+<script src="./sample.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</body>
+</html>

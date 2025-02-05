@@ -3,43 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>カレンダー共有</title>
+    <title>Family Calendar with Secure Login</title>
     <link rel="stylesheet" href="./stylesheet.css">
 </head>
 <body>
     <h1>Family Calendar</h1>
 
     <div id="login-form">
-        <h2>Login</h2>
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter your username">
+        <h2>ログイン</h2>
+        <label for="username">名前:</label>
+        <input type="text" id="username" placeholder="username">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter your password">
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" placeholder="password">
+
+        <label for="secret-question">秘密の質問:「好きな動物」</label>
+        <input type="text" id="secret-question" placeholder="answer">
 
         <button onclick="login()">Login</button>
     </div>
 
     <div id="calendar-container" style="display:none;">
-    <div class="calendar" id="calendar"></div>
+        <div class="calendar" id="calendar"></div>
 
-    <div class="event-form">
-        <label for="event-date">日付:</label>
-        <input type="date" id="event-date">
+        <div class="event-form">
+            <label for="event-date">日付:</label>
+            <input type="date" id="event-date">
 
-        <label for="event-title">タイトル:</label>
-        <input type="text" id="event-title" placeholder="Enter event title">
+            <label for="event-title">タイトル:</label>
+            <input type="text" id="event-title" placeholder="Enter event title">
 
-        <label for="event-start-time">開始時間:</label>
-        <input type="time" id="event-start-time">
+            <label for="event-start-time">開始時間:</label>
+            <input type="time" id="event-start-time">
 
-        <label for="event-end-time">終了時間:</label>
-        <input type="time" id="event-end-time">
+            <label for="event-end-time">終了時間:</label>
+            <input type="time" id="event-end-time">
 
-        <button onclick="addEvent()">追加</button>
+            <button onclick="addEvent()">予定追加</button>
+        </div>
     </div>
-    </div>
-<script src="./sample.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="./sample.js"></script>
 </body>
 </html>

@@ -1,51 +1,30 @@
 const calendarEl = document.getElementById('calendar');
 const events = [];
 
-// Secure user data with hashed passwords (using a simple simulation for this demo)
-const validUsers = [];
-
-function hashPassword(password) {
-    return CryptoJS.MD5(password).toString();
-}
-
-function registerUser() {
-    const username = document.getElementById('register-username').value.trim();
-    const password = document.getElementById('register-password').value.trim();
-    const secret = document.getElementById('register-secret').value.trim();
-
-    if (!username || !password || !secret) {
-        alert('All fields are required.');
-        return;
-    }
-
-    if (validUsers.some(user => user.username === username)) {
-        alert('Username already taken.');
-        return;
-    }
-
-    validUsers.push({
-        username,
-        password: hashPassword(password),
-        secret
-    });
-
-    alert('Registration successful! You can now log in.');
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
-}
+// Pre-registered valid users
+const validUsers = [
+    { username: 'りの', password: CryptoJS.MD5('0803').toString(), secretAnswer: 'ももんが' },
+    { username: 'たかこ', password: CryptoJS.MD5('2403').toString(), secretAnswer: 'ももんが' }
+];
 
 function login() {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
-    const hashedPassword = hashPassword(password);
-    const user = validUsers.find(user => user.username === username && user.password === hashedPassword);
+    const secretAnswer = document.getElementById('secret-question').value.trim().toLowerCase();
+    const hashedPassword = CryptoJS.MD5(password).toString();
+
+    const user = validUsers.find(user => user.username === username && user.password === hashedPassword && user.secretAnswer === secretAnswer);
 
     if (user) {
         document.getElementById('login-form').style.display = 'none';
         document.getElementById('calendar-container').style.display = 'block';
+        Object.defineProperty(window, NAME, {
+            value: user.name,
+            writable: false
+        });
         renderCalendar();
     } else {
-        alert('Invalid username or password');
+        alert('Invalid login credentials or secret answer');
     }
 }
 
@@ -75,6 +54,11 @@ function renderCalendar() {
         dayEvents.forEach(event => {
             const eventEl = document.createElement('div');
             eventEl.classList.add('event');
+            if (NAME == 'りの'){
+                eventEl.classList.add('green');
+            }else if (NAME == 'たかこ'){
+                eventEl.classList.add('orange');
+            }
             eventEl.textContent = `${event.title} (${event.startTime} - ${event.endTime})`;
             dayEl.appendChild(eventEl);
         });

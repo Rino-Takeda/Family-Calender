@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Calendar with Secure Login</title>
+    <title>共有カレンダー</title>
     <link rel="stylesheet" href="./stylesheet.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
         <label for="secret-question">秘密の質問:「好きな動物」</label>
         <input type="text" id="secret-question" placeholder="answer">
 
-        <button onclick="login()">Login</button>
+        <button onclick="login()">ログイン</button>
     </div>
 
     <div id="calendar-container" style="display:none;">
@@ -40,6 +40,13 @@
             <input type="time" id="event-end-time">
 
             <button onclick="addEvent()">予定追加</button>
+        </div>
+
+        <div id="event-details">
+            <h3>予定詳細</h3>
+            <p id="event-info"></p>
+            <button onclick="editEvent()">タイトル編集</button>
+            <button onclick="deleteEvent()">削除</button>
         </div>
     </div>
 

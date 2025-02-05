@@ -19,6 +19,7 @@ h1 {
   text-align: center;
   min-height: 100px;
   position: relative;
+  cursor: pointer;
 }
 .day span {
   font-weight: bold;
@@ -67,4 +68,15 @@ button {
   background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
+}
+#event-details {
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+#event-details h3 {
+  margin-top: 0;
 }

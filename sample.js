@@ -1,5 +1,6 @@
 const calendarEl = document.getElementById('calendar');
-const events = [];
+let events = JSON.parse(localStorage.getItem('events')) || [];
+let selectedEvent = null;
 
 // Pre-registered valid users
 const validUsers = [
@@ -18,10 +19,7 @@ function login() {
     if (user) {
         document.getElementById('login-form').style.display = 'none';
         document.getElementById('calendar-container').style.display = 'block';
-        Object.defineProperty(window, NAME, {
-            value: user.name,
-            writable: false
-        });
+        window.NAME = user.username;
         renderCalendar();
     } else {
         alert('Invalid login credentials or secret answer');
@@ -60,6 +58,7 @@ function renderCalendar() {
                 eventEl.classList.add('orange');
             }
             eventEl.textContent = `${event.title} (${event.startTime} - ${event.endTime})`;
+            eventEl.onclick = () => showEventDetails(event);
             dayEl.appendChild(eventEl);
         });
 
@@ -79,6 +78,7 @@ function addEvent() {
 
     if (date && title && startTime && endTime) {
         events.push({ date, title, startTime, endTime });
+        localStorage.setItem('events', JSON.stringify(events));
         renderCalendar();
         dateInput.value = '';
         titleInput.value = '';
@@ -87,4 +87,25 @@ function addEvent() {
     } else {
         alert('Please enter a valid date, event title, and time range.');
     }
+}
+function showEventDetails(event) {
+    selectedEvent = event;
+    document.getElementById('event-info').textContent = `${NAME} : ${event.title} / ${event.date} ${event.startTime} ～ ${event.endTime}`;
+    document.getElementById('event-details').style.display = 'block';
+}
+
+function editEvent() {
+    const newTitle = prompt('Edit event title:', selectedEvent.title);
+    if (newTitle !== null) {
+        selectedEvent.title = newTitle;
+        localStorage.setItem('events', JSON.stringify(events));
+        renderCalendar();
+    }
+}
+
+function deleteEvent() {
+    events = events.filter(event => event !== selectedEvent);
+    localStorage.setItem('events', JSON.stringify(events));
+    document.getElementById('event-details').style.display = 'none';
+    renderCalendar();
 }
